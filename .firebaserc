@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "mindguard-8cabd": {
+      "hosting": {
+        "app": [
+          "mindguard-8cabd"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "mindguard-8cabd"
+  }
+}

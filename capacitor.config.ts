@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'MindguardV2',
+  appId: 'de.mindguard.app',
+  appName: 'app',
   webDir: 'www',
   server: {
     androidScheme: 'https'
