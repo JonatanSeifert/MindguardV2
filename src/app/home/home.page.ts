@@ -9,13 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  constructor(public authservice: AuthService, public router: Router) {}
+  constructor() {}
 
 
-  async logout(){
-    const user = await this.authservice.logout();
-   
-     
-    
-  }
 }

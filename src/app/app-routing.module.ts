@@ -5,22 +5,31 @@ import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate} from '@angular
 const redirectUnauthorizedToWelcome = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
+
 const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-    ,...canActivate(redirectUnauthorizedToWelcome)
+    //,...canActivate(redirectUnauthorizedToWelcome)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./logpages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./logpages/register/register.module').then( m => m.RegisterPageModule)
+  },
+ 
+  {
+    path: 'passwordreset',
+    loadChildren: () => import('./logpages/passwordreset/passwordreset.module').then( m => m.PasswordresetPageModule)
   },
   {
     path: '**',
-    redirectTo: 'login',
+    redirectTo: '',
     pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./logpages/login/login.module').then( m => m.LoginPageModule)
-    ,...canActivate(redirectLoggedInToHome)
-  },
+  }
 ];
 
 @NgModule({
