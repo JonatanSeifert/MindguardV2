@@ -89,7 +89,7 @@ export class LoginPage implements OnInit {
         await this.authservice.createUserData(user.user.displayName, user.user.email);
         this.router.navigateByUrl('/home', {replaceUrl: true});
       }
-     //this is a test 
+    
     }
 
     }
