@@ -6,8 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  numbers: any[];
+  dates: any[];
 
-  constructor() { }
+  constructor() { 
+    this.numbers = Array(5).fill(4);
+    this.dates = Array(3).fill(4);
+  }
 
   ngOnInit() {
   }
