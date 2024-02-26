@@ -1,0 +1,82 @@
+ion-content{
+    --background: linear-gradient(to bottom, #CBFFF9, #33EAD4);
+  
+}
+
+#container{
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 100px;
+    gap: 60px;
+
+    ion-button{
+        --background: #073149;
+        --border-radius: 60px;
+        width: 300px;
+        
+    }
+    
+
+    .MainButton{
+
+        width: 200px;
+        height: 200px;
+    
+        ion-icon{
+            height: 100%;
+            width: 100%;
+        }
+        
+      }
+    
+}
+
+.header {
+    position: absolute;
+    z-index: 99;
+    top: 50px;
+    width: 100%;
+
+    ion-chip{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        // .bell{
+        //     height: 100%;
+            
+
+            ion-icon{
+                min-height: 40px   ;
+                min-width: 40px;
+            // }
+        }
+    }
+
+    .infowrapper{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .chiptext{
+        display: flex;
+        flex-direction: column;
+
+        strong{
+            font-size: x-large;
+        }
+
+        p{
+            margin: 0;
+        }
+    }
+    
+}
+
+
