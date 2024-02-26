@@ -12,16 +12,27 @@
 
     <p>email.email.com</p>
 
-    <ion-button>Edit</ion-button>
+    <!-- <ion-button>Edit</ion-button> -->
 
   </div>
 
   <ion-card>
     <div class="list">
-        <div class="item"><ion-icon name="information-circle-outline"></ion-icon><strong>Program</strong></div>
-        <div class="item"><ion-icon name="settings-outline"></ion-icon><strong>Settings</strong></div>
-        <div class="item"><ion-icon name="information-circle-outline"></ion-icon><strong>About us</strong></div>
-        <div class="item"><ion-icon name="power-outline"></ion-icon><strong>Logout</strong></div>
+        <div class="item">
+          <ion-button fill="clear" expand="full">
+            <!-- <div class="inneritem"> -->
+              <ion-icon name="information-circle-outline" class="left"></ion-icon>
+              <strong class="right">Program</strong>    
+            <!-- </div>  -->
+          </ion-button>
+        </div>
+        
+        
+        
+        
+        <div class="item"><ion-button fill="clear"expand="full"><ion-icon name="settings-outline"></ion-icon><strong>Settings</strong></ion-button></div>
+        <div class="item"><ion-button fill="clear"expand="full"><ion-icon name="information-circle-outline"></ion-icon><strong>About us</strong></ion-button></div>
+        <div class="item"><ion-button fill="clear"expand="full"><ion-icon name="power-outline"></ion-icon><strong>Logout</strong></ion-button></div>
     </div>
   </ion-card>
 </div>
