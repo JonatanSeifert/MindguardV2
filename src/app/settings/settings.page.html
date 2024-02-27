@@ -1,5 +1,5 @@
 
-<ion-content [fullscreen]="true" srollY="false">
+<ion-content [fullscreen]="true" [scrollY]="false">
 <div class="container">
 
   <div class="userinfo">
@@ -32,7 +32,7 @@
         
         <div class="item"><ion-button fill="clear"expand="full"><ion-icon name="settings-outline"></ion-icon><strong>Settings</strong></ion-button></div>
         <div class="item"><ion-button fill="clear"expand="full"><ion-icon name="information-circle-outline"></ion-icon><strong>About us</strong></ion-button></div>
-        <div class="item"><ion-button fill="clear"expand="full"><ion-icon name="power-outline"></ion-icon><strong>Logout</strong></ion-button></div>
+        <div class="item"><ion-button fill="clear"expand="full" (click)="logout()"><ion-icon name="power-outline"></ion-icon><strong>Logout</strong></ion-button></div>
     </div>
   </ion-card>
 </div>

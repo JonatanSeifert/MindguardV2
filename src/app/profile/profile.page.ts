@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -6,12 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  numbers: any[];
-  dates: any[];
+  
+  
 
-  constructor() { 
-    this.numbers = Array(5).fill(4);
-    this.dates = Array(3).fill(4);
+  constructor(public authservice: AuthService) { 
+   
+    
+    
   }
 
   ngOnInit() {

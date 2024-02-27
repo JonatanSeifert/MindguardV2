@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-    //,...canActivate(redirectUnauthorizedToWelcome)
+    ,...canActivate(redirectUnauthorizedToWelcome)
   },
   {
     path: '',
@@ -24,6 +24,11 @@ const routes: Routes = [
   {
     path: 'passwordreset',
     loadChildren: () => import('./logpages/passwordreset/passwordreset.module').then( m => m.PasswordresetPageModule)
+  },
+  {
+    path: 'program',
+    loadChildren: () => import('./program/program.module').then( m => m.ProgramPageModule)
+    ,...canActivate(redirectUnauthorizedToWelcome)
   },
   {
     path: '**',

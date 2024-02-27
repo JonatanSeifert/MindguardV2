@@ -12,18 +12,19 @@
 <div class="container">
     <div class="scrollable">
   <ion-list class="ion-padding" >
-    <ion-item-group *ngFor="let d of dates">
+
+    <ion-item-group *ngFor="let date of this.authservice.finalarray">
     <ion-item-divider>
-      <p> Section A </p>
+      <p> {{date.date}} </p>
     </ion-item-divider>
 
-    <ion-item-sliding *ngFor="let i of numbers"  >
+    <ion-item-sliding *ngFor="let item of date.logs">
    
   
       <ion-item [button]="true" >
         <ion-label>
-          <h1>NAME</h1>
-          <p>Sliding Item with Icons Only</p>
+          <h1>{{item.name}}</h1>
+          <p>{{item.dateTime}}</p>
         </ion-label>
       </ion-item>
   

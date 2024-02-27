@@ -1,0 +1,22 @@
+<ion-content [fullscreen]="true" [scrollY]="false">
+<div class="container">
+  <div class="headerwrapper">
+  <p class="header">MindGuard</p>
+  <h1 class="title">Breathing Exerice</h1>
+</div>
+
+<div class="middlewrapper">
+  <h1 class="flipnumber">{{Counter}}</h1>
+  <strong><p>{{instructions}}</p></strong>
+  <div class="whitecard">
+  <div class="animationcontainer">
+    <div class="swiper" #swiper></div>
+    <img src="assets/icon/breathe.svg"/>
+  </div>
+</div>
+</div>
+  <ion-button (click)="stop()">{{sors}}</ion-button>
+  </div>
+ 
+
+</ion-content>

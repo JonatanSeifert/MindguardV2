@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-sos',
@@ -8,16 +10,16 @@ import { AuthService } from '../service/auth.service';
 })
 export class SosPage implements OnInit {
 
-  constructor(public authservice: AuthService) { }
+  constructor(public authservice: AuthService, public router: Router) { }
 
   ngOnInit() {
   }
 
-  async logout(){
-    const user = await this.authservice.logout();
-   
-     
-    
+  sos(){
+    this.router.navigateByUrl('/program');
   }
+
+
+  
 
 }
