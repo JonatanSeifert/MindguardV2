@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Input, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -8,6 +8,7 @@ import { ProgramPageRoutingModule } from './program-routing.module';
 
 import { ProgramPage } from './program.page';
 import { Program1Component } from '../programs/program1/program1.component';
+import { Program2Component } from '../programs/program2/program2.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,9 @@ import { Program1Component } from '../programs/program1/program1.component';
     IonicModule,
     ProgramPageRoutingModule
   ],
-  declarations: [ProgramPage, Program1Component]
+  declarations: [ProgramPage, Program1Component, Program2Component]
 })
-export class ProgramPageModule {}
+export class ProgramPageModule {
+  @Input() customData: any;
+
+}

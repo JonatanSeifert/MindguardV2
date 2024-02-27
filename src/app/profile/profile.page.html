@@ -15,7 +15,7 @@
 
     <ion-item-group *ngFor="let date of this.authservice.finalarray">
     <ion-item-divider>
-      <p> {{date.date}} </p>
+      <p> {{formatDate(date.date)}} </p>
     </ion-item-divider>
 
     <ion-item-sliding *ngFor="let item of date.logs">
@@ -24,7 +24,7 @@
       <ion-item [button]="true" >
         <ion-label>
           <h1>{{item.name}}</h1>
-          <p>{{item.dateTime}}</p>
+          <p>{{formatDateandTime(item.dateTime)}}</p>
         </ion-label>
       </ion-item>
   

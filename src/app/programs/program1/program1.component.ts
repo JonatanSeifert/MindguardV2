@@ -81,15 +81,15 @@ export class Program1Component  implements AfterViewInit {
         {
           text: 'Not Helpfull',
           cssClass: 'alert-helpfull-cancel',
-          handler:() =>{
-            this.authservice.programRate("Breathing Exercise", false);
+          handler:async () => {
+            await this.authservice.programRate("Breathing Exercise", false);
             this.router.navigateByUrl('/home',{replaceUrl: true});
           }
       },{
         text: 'Helpfull',
         cssClass: 'alert-helpfull-confirm',
-        handler:() =>{
-          this.authservice.programRate("Breathing Exercise", true);
+        handler:async () =>{
+          await this.authservice.programRate("Breathing Exercise", true);
           this.router.navigateByUrl('/home',{replaceUrl: true});
         }
       }

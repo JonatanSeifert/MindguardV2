@@ -1,6 +1,7 @@
 
 <ion-content [fullscreen]="true" [scrollY]="false">
-  <app-program1></app-program1>
+  <app-program1 *ngIf="program==1"></app-program1>
+  <app-program2 *ngIf="program==2"></app-program2>
 </ion-content>
 
 
