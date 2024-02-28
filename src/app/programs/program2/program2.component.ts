@@ -33,6 +33,7 @@ export class Program2Component  implements OnInit {
 
   constructor(public authservice: AuthService, public alertcntrl: AlertController, public router:Router, public loader: LoadingController) { }
 
+  dateTime:any;
   ngOnInit() {
    
   }
@@ -40,8 +41,9 @@ export class Program2Component  implements OnInit {
 
    
 
-  
-    this.authservice.addSOS("3-3-3 Rule");
+    
+    this.dateTime = new Date().toISOString();
+    this.authservice.addSOS("3-3-3 Rule", this.dateTime);
     
 
     
@@ -75,15 +77,16 @@ export class Program2Component  implements OnInit {
         {
           text: 'Not Helpfull',
           cssClass: 'alert-helpfull-cancel',
-          handler:async () => {
-            await this.authservice.programRate("3-3-3 Rule", false);
+          handler:async (data) => {
+            await this.authservice.updateSos("3-3-3 Rule", false, "new", this.dateTime, data.title, data.message);
             this.router.navigateByUrl('/home',{replaceUrl: true});
           }
       },{
         text: 'Helpfull',
         cssClass: 'alert-helpfull-confirm',
-        handler:async () =>{
-          await this.authservice.programRate("3-3-3 Rule", true);
+        handler:async (data) =>{
+          await this.authservice.updateSos("3-3-3 Rule", true, "new", this.dateTime, data.title, data.message);
+
           this.router.navigateByUrl('/home',{replaceUrl: true});
         }
       }

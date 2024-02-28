@@ -32,10 +32,12 @@ export class ProgramPage implements OnInit {
       let programs = [];
       if(this.authservice.data.program!=undefined){
         programs = JSON.parse(this.authservice.data.program);
-      }else{
-        await this.authservice.programRate("Breathing Exercise", false);
-        await this.authservice.programRate("3-3-3 Rule", false);
       }
+      
+      // else{
+      //   await this.authservice.programRate("Breathing Exercise", false);
+      //   await this.authservice.programRate("3-3-3 Rule", false);
+      // }
       
       
       

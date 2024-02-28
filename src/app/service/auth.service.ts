@@ -39,6 +39,13 @@ export class AuthService {
 
                    this.updateProtocol();
 
+                   if(data['program']==undefined){
+                    // console.log("leer");
+                    const user = this.auth.currentUser;
+                    const dataRef = doc(this.firestore, `profile/${user?.uid}`);
+                    setDoc(dataRef, {program : JSON.stringify([{name: "Breathing Exercise", helpfullness: 0},{name : "3-3-3 Rule", helpfullness: 0}])}, {merge: true}); 
+                   }
+
                   }
                   
                 }
@@ -60,7 +67,7 @@ export class AuthService {
     const dataSnap = await getDoc(dataRef);
 
     if(dataSnap.exists()){
-      console.log("yay");
+      // console.log("yay");
       
     }else{
       await setDoc(dataRef,{ name: fullname, email: email} );
@@ -91,7 +98,7 @@ export class AuthService {
       
       
         updateProfile(user.user, {displayName: name});
-        console.log("send2");
+        // console.log("send2");
         
       
       return user;
@@ -106,11 +113,11 @@ export class AuthService {
   async login(email: any, password:any){
     try {
       const user = signInWithEmailAndPassword(this.auth, email, password);
-      console.log("send");
+      // console.log("send");
       return user;
       
     } catch (error) {
-      console.log("failed");
+      // console.log("failed");
       
       return null;
     }
@@ -130,7 +137,7 @@ export class AuthService {
     const sendmail = sendEmailVerification(this.auth.currentUser);
     return sendmail;
     }else{
-      console.log("AHHHHHH");
+      // console.log("AHHHHHH");
       return null;
     }
   }
@@ -141,7 +148,7 @@ export class AuthService {
   }
 
 
-  async programRate(program: string, topflop: boolean){
+  async updateSos(program: string, topflop: boolean, topflophandler: string, dateTime: string, title: string, description: string){
     const user = this.auth.currentUser;
     const dataRef = doc(this.firestore, `profile/${user?.uid}`);
 
@@ -172,11 +179,36 @@ export class AuthService {
         
       }
 
-      await setDoc(dataRef, {program : JSON.stringify(p)}, {merge: true});        
+      await setDoc(dataRef, {program : JSON.stringify(p)}, {merge: true}); 
       
+      let protocol =  JSON.parse(this.data['protocol'])
+      console.log("vorher: " + this.data['protocol']);
+      
+      for(let protocolitem of protocol){
+        if(protocolitem.dateTime == dateTime){
+
+         
+         
+
+          protocolitem.name = title;
+
+          
+          protocolitem.description = description;
+          
+          
+        }
+        console.log(protocolitem);
+      }
+      
+
+      this.data['protocol'] = JSON.stringify(protocol);
+     // console.log("Nacher: "+this.data['protocol']);
+
+      await setDoc(dataRef, {protocol : JSON.stringify(protocol)}, {merge: true}); 
+     
   }
 
-  async addSOS(UsedExercise: string){
+  async addSOS(UsedExercise: string, dateTime: string){
     let rawdata = this.data['protocol'];
     let data:any = [];
     if(rawdata!=undefined) data = JSON.parse(rawdata);
@@ -188,29 +220,19 @@ export class AuthService {
     //Name
     let name = "Auto Generated"
     
-    let dateTime = new Date().toISOString();
+    
     
     
     //Used Exercise
-    sos = {name: name, location: location,dateTime: dateTime ,usedExercise: UsedExercise};
+    sos = {name: name, location: location, dateTime: dateTime ,usedExercise: UsedExercise};
     data.push(sos);
     const user = this.auth.currentUser;
     const dataRef = doc(this.firestore, `profile/${user?.uid}`);
+
     await setDoc(dataRef, {protocol : JSON.stringify(data)}, {merge: true});   
 
   }
 
-
-  updateSOS(title: string, message: string, topflop: boolean){
-    let rawdata = this.data['protocol'];
-    let data:any = [];
-    if(rawdata!=undefined) data = JSON.parse(rawdata);
-
-
-    
-
-
-  }
 
   updateProtocol(){
 
@@ -221,7 +243,7 @@ export class AuthService {
     if(rawdata!=undefined) data = JSON.parse(rawdata);
 
     if(data.length==0){
-      console.log("Nichts zum sortieren");
+      // console.log("Nichts zum sortieren");
       return;
       
     }
@@ -250,8 +272,8 @@ export class AuthService {
     dateObjects.sort((b, a) => a.getTime() - b.getTime());
     dates = dateObjects.map((date) => date.toISOString());
 
-    console.log("Relevant days:");
-    console.log(dates);
+    // console.log("Relevant days:");
+    // console.log(dates);
 
      this.finalarray =[];
 
@@ -276,13 +298,13 @@ export class AuthService {
     }
 
 
-    console.log(this.finalarray);
+    // console.log(this.finalarray);
 
-    //[{datum, [{data, date}]}]
+    // //[{datum, [{data, date}]}]
 
 
    
-    console.log("DoneSort");
+    // console.log("DoneSort");
     
 
   }
@@ -294,12 +316,12 @@ export class AuthService {
     
     
     if(permission.camera != 'granted' || permission.photos != 'granted'){
-      console.log("ask for permission");
+      // console.log("ask for permission");
       
       const result = await Camera.requestPermissions();
 
       if(result.camera != 'granted' || result.photos != 'granted'){
-        console.log(permission);
+        // console.log(permission);
 
         const alertdrama = await this.alertctrl.create({
           header: 'Permission denied',

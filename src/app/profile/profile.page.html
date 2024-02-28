@@ -22,9 +22,14 @@
    
   
       <ion-item [button]="true" >
+        <div class="time" slot="start">
+          <ion-icon name="alarm"></ion-icon>
+          <h6>{{formatTime(item.dateTime)}}</h6>
+        </div>
         <ion-label>
+          <p>{{item.usedExercise}}</p>
           <h1>{{item.name}}</h1>
-          <p>{{formatDateandTime(item.dateTime)}}</p>
+          <p>{{item.location}}</p>
         </ion-label>
       </ion-item>
   

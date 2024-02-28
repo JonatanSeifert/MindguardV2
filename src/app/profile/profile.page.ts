@@ -39,6 +39,15 @@ export class ProfilePage implements OnInit {
     return formattedDate+ " " + formattedTime;
   }
 
+  formatTime(isoString: string): string {
+    const dateObject = new Date(isoString);
+    
+   
+
+    const formattedTime = dateObject.toLocaleTimeString('en-Us', { hour: '2-digit', minute: '2-digit'});
+    
+    return formattedTime;
+  }
 
  
 

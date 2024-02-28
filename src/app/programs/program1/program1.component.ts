@@ -19,9 +19,10 @@ export class Program1Component  implements AfterViewInit {
   roll:boolean = false;
   instructions: any="Start the Exercise";
   sors: any ="Start here"
+  dateTime:any;
 
   constructor(public animimationctrl: AnimationController, public alertcntrl: AlertController, public router: Router, public authservice: AuthService) {
- 
+    
 
    }
 
@@ -34,8 +35,9 @@ export class Program1Component  implements AfterViewInit {
     .duration(15000) // Dauer der Animation in Millisekunden
     .fromTo('width', '100%', '0%');
 
-  
-    this.authservice.addSOS("Breathing Exercise");
+   
+    this.dateTime  = new Date().toISOString();
+    this.authservice.addSOS("Breathing Exercise", this.dateTime);
 
     
 
@@ -81,15 +83,20 @@ export class Program1Component  implements AfterViewInit {
         {
           text: 'Not Helpfull',
           cssClass: 'alert-helpfull-cancel',
-          handler:async () => {
-            await this.authservice.programRate("Breathing Exercise", false);
+          handler:async (data) => {
+
+            await this.authservice.updateSos("Breathing Exercise", false, "new", this.dateTime, data.title, data.message);
+            
             this.router.navigateByUrl('/home',{replaceUrl: true});
           }
       },{
         text: 'Helpfull',
         cssClass: 'alert-helpfull-confirm',
-        handler:async () =>{
-          await this.authservice.programRate("Breathing Exercise", true);
+        handler:async (data) =>{
+
+          await this.authservice.updateSos("Breathing Exercise", true, "new", this.dateTime, data.title, data.message);
+          
+          
           this.router.navigateByUrl('/home',{replaceUrl: true});
         }
       }
