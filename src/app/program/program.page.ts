@@ -57,7 +57,8 @@ export class ProgramPage implements OnInit {
           this.program = 1;
 
         }else if(choose[randomIndex].name=="3-3-3 Rule"){
-          console.log("2");
+         
+          this.program = 2;
           
         }else{
           console.log("daFuq");

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Auth, authState, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile } from '@angular/fire/auth';
 import { Firestore, collection, doc, docData, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { Camera } from '@capacitor/camera';
+import { AlertController } from '@ionic/angular';
+import { AndroidSettings, IOSSettings, NativeSettings } from 'capacitor-native-settings';
 
 
 @Injectable({
@@ -15,7 +18,7 @@ export class AuthService {
   finalarray: any =[];
  
 
-  constructor(public auth: Auth, public firestore: Firestore, public router: Router) {
+  constructor(public auth: Auth, public firestore: Firestore, public router: Router, public alertctrl: AlertController) {
    
     this.authstates =  authState(this.auth).subscribe(user => {
      
@@ -29,7 +32,7 @@ export class AuthService {
                   
                   if(user.emailVerified==true){
                    
-                   
+                  
                    if(router.url=="/login" || router.url=="/register" || router.url=="/passwordreset" || router.url=="/"){ 
                     router.navigateByUrl('/home');
                    }
@@ -42,6 +45,10 @@ export class AuthService {
         })
       }
     });
+
+
+    
+
    }
 
    async createUserData(fullname: any, email: any){
@@ -280,4 +287,46 @@ export class AuthService {
 
   }
 
+
+
+  async checkAndRequestPermissions(){
+    const permission = await Camera.checkPermissions();
+    
+    
+    if(permission.camera != 'granted' || permission.photos != 'granted'){
+      console.log("ask for permission");
+      
+      const result = await Camera.requestPermissions();
+
+      if(result.camera != 'granted' || result.photos != 'granted'){
+        console.log(permission);
+
+        const alertdrama = await this.alertctrl.create({
+          header: 'Permission denied',
+          subHeader: 'please give Mindguard permissions',
+          message: 'Mindguard was created to give immediate help. Permissions Request could cost valueable seconds',
+          backdropDismiss: false,
+          buttons: [{
+            'text': "Give Permission",
+            'handler': () => {
+              NativeSettings.open({
+                optionAndroid: AndroidSettings.ApplicationDetails,
+                optionIOS: IOSSettings.App
+              });
+            }
+          }]
+        });
+
+        await alertdrama.present();
+
+      }
+
+
+    }
+
+
+  }
+
+
 }
+
