@@ -50,9 +50,20 @@ form{
 ion-input{
     width: 90%;
     margin-bottom: 5px;
+   
 }
 
 .forgotpassword{
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+ion-content{
+    --background: linear-gradient(to bottom, #CBFFF9, #33EAD4);
+}
+
+
+ion-item{
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
