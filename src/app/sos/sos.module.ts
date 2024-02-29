@@ -17,4 +17,4 @@ import { SosPage } from './sos.page';
   ],
   declarations: [SosPage]
 })
-export class SosPageModule {}
+export class SosPageModule { }

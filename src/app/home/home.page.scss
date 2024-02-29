@@ -1,44 +1,40 @@
-ion-label{
+ion-label {
   font-size: medium;
   position: absolute;
   bottom: 11px;
 }
 
-ion-icon{
+ion-icon {
   position: absolute;
   bottom: 35px;
 }
 
-.SosButton_small{
+.SosButton_small {
   height: 200%;
   position: relative;
   background-color: transparent;
 
 
-  ion-icon{
-      height: 60%;
-      width: 60%;
-      position: absolute;
-      top: 0px;
+  ion-icon {
+    height: 60%;
+    width: 60%;
+    position: absolute;
+    top: 0px;
   }
 
-  ion-label{
-      position: absolute;
-      bottom: 50px;
-      color: #FF7E7E;
-      font-size: medium;
+  ion-label {
+    position: absolute;
+    bottom: 50px;
+    color: #FF7E7E;
+    font-size: medium;
   }
 }
 
-ion-tab-bar{
-  contain:unset;
+ion-tab-bar {
+  contain: unset;
   height: 80px;
   --background: #FFFFFF;
   --border: 0;
 
   box-shadow: 0px -5px 15px -3px #0000001f
- 
-
 }
-
-

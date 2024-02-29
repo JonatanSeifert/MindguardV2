@@ -17,4 +17,4 @@ import { AboutusPage } from './aboutus.page';
   ],
   declarations: [AboutusPage]
 })
-export class AboutusPageModule {}
+export class AboutusPageModule { }

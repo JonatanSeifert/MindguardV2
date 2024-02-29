@@ -12,13 +12,13 @@ import { AuthService } from 'src/app/service/auth.service';
 export class PasswordresetPage implements OnInit {
 
   resForm = new FormGroup({
-    
-    email: new FormControl ('', [
+
+    email: new FormControl('', [
 
       Validators.required,
       Validators.email
     ])
-});
+  });
 
 
   constructor(public loadingCtrl: LoadingController, public authService: AuthService, public alertcontroller: AlertController, public router: Router) { }
@@ -28,10 +28,10 @@ export class PasswordresetPage implements OnInit {
 
 
 
-  async reset(){
+  async reset() {
     const loading = await this.loadingCtrl.create();
     await loading.present();
-    if(this.resForm?.valid && this.resForm.value.email){
+    if (this.resForm?.valid && this.resForm.value.email) {
       const user = await this.authService.resetPassword(this.resForm.value.email).catch((error) => {
         console.log(error);
         loading.dismiss();
@@ -41,17 +41,17 @@ export class PasswordresetPage implements OnInit {
       const alert = await this.alertcontroller.create({
         header: 'Password Reset',
         message: 'We send you an email to reset your password.',
-        buttons: [{text: 'Got it!', handler: () =>{this.router.navigateByUrl('/');}}],
+        buttons: [{ text: 'Got it!', handler: () => { this.router.navigateByUrl('/'); } }],
       });
-  
+
       await alert.present();
 
-      
 
-    }else{
+
+    } else {
       loading.dismiss();
       return;
     }
   }
-  
+
 }

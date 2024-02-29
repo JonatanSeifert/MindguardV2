@@ -14,20 +14,20 @@ import { Capacitor } from '@capacitor/core';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, 
-    provideFirebaseApp(() => initializeApp({"projectId":"mindguard-8cabd","appId":"1:922688798943:web:0f0b685d2b79c9b8a0296a","storageBucket":"mindguard-8cabd.appspot.com","apiKey":"AIzaSyDBNimtNM8PitvCGAmI8YqiTRaOF4hACPc","authDomain":"mindguard-8cabd.firebaseapp.com","messagingSenderId":"922688798943","measurementId":"G-CMMN24BDLP"})),
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    provideFirebaseApp(() => initializeApp({ "projectId": "mindguard-8cabd", "appId": "1:922688798943:web:0f0b685d2b79c9b8a0296a", "storageBucket": "mindguard-8cabd.appspot.com", "apiKey": "AIzaSyDBNimtNM8PitvCGAmI8YqiTRaOF4hACPc", "authDomain": "mindguard-8cabd.firebaseapp.com", "messagingSenderId": "922688798943", "measurementId": "G-CMMN24BDLP" })),
     provideAuth(() => {
-      if(Capacitor.isNativePlatform()){
-        return initializeAuth(getApp(),{
+      if (Capacitor.isNativePlatform()) {
+        return initializeAuth(getApp(), {
           persistence: indexedDBLocalPersistence
         });
-      }else{
+      } else {
         return getAuth();
       }
-     }), 
-      provideFirestore(() => getFirestore()), 
-      provideStorage(() => getStorage())],
+    }),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

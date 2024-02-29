@@ -18,4 +18,4 @@ import { ProtocolComponent } from '../protocol/protocol.component';
   ],
   declarations: [ProfilePage, ProtocolComponent]
 })
-export class ProfilePageModule {}
+export class ProfilePageModule { }

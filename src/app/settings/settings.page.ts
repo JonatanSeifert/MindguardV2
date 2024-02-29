@@ -15,18 +15,18 @@ export class SettingsPage implements OnInit {
   }
 
 
-  async logout(){
+  async logout() {
     const user = await this.authservice.logout();
-   
-     
-    
+
+
+
   }
 
-  changeprofile(){
+  changeprofile() {
     this.router.navigateByUrl('/changeprofile');
   }
 
-  aboutus(){
+  aboutus() {
     this.router.navigateByUrl('/aboutus');
   }
 }

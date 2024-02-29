@@ -13,7 +13,7 @@ export class AboutusPage implements OnInit {
   ngOnInit() {
   }
 
-  back(){
+  back() {
     this.router.navigateByUrl('/home/settings');
   }
 

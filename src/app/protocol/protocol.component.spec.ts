@@ -9,7 +9,7 @@ describe('ProtocolComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProtocolComponent ],
+      declarations: [ProtocolComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

@@ -12,19 +12,19 @@ import { AuthService } from 'src/app/service/auth.service';
 export class RegisterPage implements OnInit {
 
   regForm = new FormGroup({
-    fullname: new FormControl ('', Validators.required),
+    fullname: new FormControl('', Validators.required),
 
-    email: new FormControl ('', [
+    email: new FormControl('', [
 
       Validators.required,
       Validators.email
     ]),
 
-    password: new FormControl ('',[
+    password: new FormControl('', [
       Validators.required,
       Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$")
     ])
-});
+  });
 
   constructor(public loadingCtrl: LoadingController, public authService: AuthService, public router: Router) { }
 
@@ -32,19 +32,19 @@ export class RegisterPage implements OnInit {
   }
 
 
-  async signUp(){
+  async signUp() {
     const loading = await this.loadingCtrl.create();
     await loading.present();
-    if(this.regForm?.valid && this.regForm.value.email && this.regForm.value.password){
+    if (this.regForm?.valid && this.regForm.value.email && this.regForm.value.password) {
       const user = await this.authService.register(this.regForm.value.email, this.regForm.value.password, this.regForm.value.fullname).catch((error) => {
-        console.log("error::"+error);
+        console.log("error::" + error);
         loading.dismiss();
       });
 
-      console.log(user);
-      
+     
 
-      if(user!=null){
+
+      if (user != null) {
 
         loading.dismiss();
         this.authService.sendVerificationEmail();
@@ -52,7 +52,7 @@ export class RegisterPage implements OnInit {
       }
       loading.dismiss();
 
-    }else{
+    } else {
       loading.dismiss();
     }
   }

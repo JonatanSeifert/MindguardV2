@@ -51,7 +51,6 @@ export class AuthService {
 
 
               if (data['program'] == undefined) {
-                // console.log("leer");
                 const user = this.auth.currentUser;
                 const dataRef = doc(this.firestore, `profile/${user?.uid}`);
                 setDoc(dataRef, { program: JSON.stringify([{ name: "Breathing Exercise", helpfullness: 0 }, { name: "3-3-3 Rule", helpfullness: 0 }]) }, { merge: true });
@@ -80,12 +79,12 @@ export class AuthService {
 
     const user = this.auth.currentUser;
 
-    //  await setDoc(doc(this.firestore, "cities", "La"),{ name: "test"} );
+
     const dataRef = doc(this.firestore, `profile/${user?.uid}`);
     const dataSnap = await getDoc(dataRef);
 
     if (dataSnap.exists()) {
-      // console.log("yay");
+
 
     } else {
       await setDoc(dataRef, { name: fullname, email: email });
@@ -116,7 +115,7 @@ export class AuthService {
 
 
       updateProfile(user.user, { displayName: name });
-      // console.log("send2");
+
 
 
       return user;
@@ -131,11 +130,11 @@ export class AuthService {
   async login(email: any, password: any) {
     try {
       const user = signInWithEmailAndPassword(this.auth, email, password);
-      // console.log("send");
+
       return user;
 
     } catch (error) {
-      // console.log("failed");
+
 
       return null;
     }
@@ -155,7 +154,7 @@ export class AuthService {
       const sendmail = sendEmailVerification(this.auth.currentUser);
       return sendmail;
     } else {
-      // console.log("AHHHHHH");
+
       return null;
     }
   }
@@ -182,28 +181,28 @@ export class AuthService {
 
         if (topflop) {
           if (topflophandler == "stay") {
-            //console.log("stay");
+
 
           } else if (topflophandler == "change") {
             i.helpfullness += 2;
-            // console.log("change");
+
 
           } else {
-            //console.log("nomramls");
+
 
             i.helpfullness++;
           }
 
         } else {
           if (topflophandler == "stay") {
-            //console.log("stay");
+
 
           } else if (topflophandler == "change") {
             i.helpfullness -= 2;
-            //console.log("change");
+
 
           } else {
-            // console.log("nomramls");
+
 
             i.helpfullness--;
           }
@@ -224,7 +223,7 @@ export class AuthService {
     await setDoc(dataRef, { program: JSON.stringify(p) }, { merge: true });
 
     let protocol = JSON.parse(this.data['protocol'])
-    //console.log("vorher: " + this.data['protocol']);
+
 
     for (let protocolitem of protocol) {
       if (protocolitem.dateTime == dateTime) {
@@ -240,13 +239,13 @@ export class AuthService {
 
 
       }
-      // console.log(protocolitem);
+
     }
 
 
 
     this.data['protocol'] = JSON.stringify(protocol);
-    // console.log("Nacher: "+this.data['protocol']);
+
 
     await setDoc(dataRef, { protocol: JSON.stringify(protocol) }, { merge: true });
 
@@ -259,17 +258,17 @@ export class AuthService {
 
     let sos: any;
 
-    //Location
-    console.log("start loc");
-    
+
+
+
     let location = await this.getCloseLocation();
-    //Name
+
     let name = "Auto Generated"
 
 
 
 
-    //Used Exercise
+
     sos = { name: name, location: location, dateTime: dateTime, usedExercise: UsedExercise };
     data.push(sos);
     const user = this.auth.currentUser;
@@ -282,7 +281,7 @@ export class AuthService {
 
   async deleteSOS(item: any) {
     let id = item.dateTime;
-    console.log(id);
+
 
     let protocol = JSON.parse(this.data['protocol'])
     let todelete;
@@ -292,11 +291,11 @@ export class AuthService {
         todelete = protocolitem;
 
       }
-      // console.log(protocolitem);
+
     }
 
 
-    console.log(protocol.indexOf(todelete));
+
 
     if (protocol.indexOf(todelete) == -1) {
       this.finalarray = [];
@@ -307,7 +306,7 @@ export class AuthService {
     protocol.splice(protocol.indexOf(todelete), 1);
 
     this.data['protocol'] = JSON.stringify(protocol);
-    // console.log("Nacher: "+this.data['protocol']);
+
     const user = this.auth.currentUser;
     const dataRef = doc(this.firestore, `profile/${user?.uid}`);
     await setDoc(dataRef, { protocol: JSON.stringify(protocol) }, { merge: true });
@@ -324,12 +323,11 @@ export class AuthService {
     if (rawdata != undefined) data = JSON.parse(rawdata);
 
     if (data.length == 0) {
-      // console.log("Nichts zum sortieren");
+
       return;
 
     }
 
-    //generate relevant dates
 
     let dates: any = [];
 
@@ -353,8 +351,7 @@ export class AuthService {
     dateObjects.sort((b, a) => a.getTime() - b.getTime());
     dates = dateObjects.map((date) => date.toISOString());
 
-    // console.log("Relevant days:");
-    // console.log(dates);
+
 
     this.finalarray = [];
 
@@ -379,13 +376,6 @@ export class AuthService {
     }
 
 
-    // console.log(this.finalarray);
-
-    // //[{datum, [{data, date}]}]
-
-
-
-    // console.log("DoneSort");
 
 
   }
@@ -398,12 +388,12 @@ export class AuthService {
 
 
     if (permission.camera != 'granted' || permission.photos != 'granted') {
-      // console.log("ask for permission");
+
 
       const result = await Camera.requestPermissions();
 
       if (result.camera != 'granted' || result.photos != 'granted') {
-        // console.log(permission);
+
 
         const alertdrama = await this.alertctrl.create({
           header: 'Permission denied',
@@ -429,42 +419,42 @@ export class AuthService {
 
 
 
-      const geopermission = await Geolocation.checkPermissions();
+    const geopermission = await Geolocation.checkPermissions();
 
 
-      if (geopermission.location != 'granted' ) {
-        // console.log("ask for permission");
+    if (geopermission.location != 'granted') {
 
-        const result = await Geolocation.requestPermissions();
 
-        if (result.location != 'granted' ) {
-          // console.log(permission);
+      const result = await Geolocation.requestPermissions();
 
-          const alertdrama = await this.alertctrl.create({
-            header: 'Permission denied',
-            subHeader: 'please give Mindguard permissions',
-            message: 'Mindguard was created to give immediate help. Permissions Request could cost valueable seconds',
-            backdropDismiss: false,
-            buttons: [{
-              'text': "Give Permission",
-              'handler': () => {
-                NativeSettings.open({
-                  optionAndroid: AndroidSettings.ApplicationDetails,
-                  optionIOS: IOSSettings.App
-                });
-              }
-            }]
-          });
+      if (result.location != 'granted') {
 
-          await alertdrama.present();
 
-        }
+        const alertdrama = await this.alertctrl.create({
+          header: 'Permission denied',
+          subHeader: 'please give Mindguard permissions',
+          message: 'Mindguard was created to give immediate help. Permissions Request could cost valueable seconds',
+          backdropDismiss: false,
+          buttons: [{
+            'text': "Give Permission",
+            'handler': () => {
+              NativeSettings.open({
+                optionAndroid: AndroidSettings.ApplicationDetails,
+                optionIOS: IOSSettings.App
+              });
+            }
+          }]
+        });
 
+        await alertdrama.present();
 
       }
 
-      console.log(this.getCloseLocation());
-    
+
+    }
+
+
+
 
   }
 
@@ -479,7 +469,7 @@ export class AuthService {
   }
 
   async uploadPhoto(photo: any) {
-    console.log();
+
 
     const user = this.auth.currentUser;
     const storageRef = ref(this.storage, `uploads/${user?.uid}/profile.png`);
@@ -497,17 +487,17 @@ export class AuthService {
   }
 
 
-  async getCloseLocation(){
+  async getCloseLocation() {
     let options: PositionOptions = {
       enableHighAccuracy: false
     };
 
     const location = await Geolocation.getCurrentPosition(options);
-    console.log("gotloc");
-    
-    NativeGeocoder.reverseGeocode(location.coords.latitude, location.coords.longitude, this.decoderoptions).then( (result: NativeGeocoderResult[]) => {
-      console.log(result[0].areasOfInterest[0]);
-      
+
+
+    NativeGeocoder.reverseGeocode(location.coords.latitude, location.coords.longitude, this.decoderoptions).then((result: NativeGeocoderResult[]) => {
+
+
       return result[0].areasOfInterest[0];
     });
 

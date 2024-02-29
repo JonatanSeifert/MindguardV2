@@ -22,19 +22,19 @@
         <strong>
           <p>{{item.usedExercise}}</p>
         </strong>
-        <!-- <p></p> -->
+
       </div>
     </div>
     <div class="rating">
       <div class="rleft">
-      <h2>Rating</h2>
-      <img *ngIf="item.topflop" src="assets/icon/Group 100.svg" />
-      <img *ngIf="!item.topflop" src="assets/icon/Group 101.svg" />
-    </div>
-    <div class="rright" (click)="edit()">
-      <ion-icon name="create-outline"></ion-icon>
-    <p>Edit</p>  
-    </div>
+        <h2>Rating</h2>
+        <img *ngIf="item.topflop" src="assets/icon/Group 100.svg" />
+        <img *ngIf="!item.topflop" src="assets/icon/Group 101.svg" />
+      </div>
+      <div class="rright" (click)="edit()">
+        <ion-icon name="create-outline"></ion-icon>
+        <p>Edit</p>
+      </div>
     </div>
   </div>
 

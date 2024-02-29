@@ -10,12 +10,12 @@ import { ProtocolComponent } from '../protocol/protocol.component';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  
-  
 
-  constructor(public authservice: AuthService, public modalCtrl: ModalController) { 
-   
-    
+
+
+  constructor(public authservice: AuthService, public modalCtrl: ModalController) {
+
+
   }
 
   ngOnInit() {
@@ -23,30 +23,30 @@ export class ProfilePage implements OnInit {
 
   formatDate(isoString: string): string {
     const dateObject = new Date(isoString);
-    
-   
+
+
     const formattedDate = dateObject.toLocaleDateString('en-Us', { day: 'numeric', month: 'long', year: 'numeric' });
-    
+
     return formattedDate;
   }
 
   formatDateandTime(isoString: string): string {
     const dateObject = new Date(isoString);
-    
-   
+
+
     const formattedDate = dateObject.toLocaleDateString('en-Us', { day: 'numeric', month: 'long', year: 'numeric' });
-    const formattedTime = dateObject.toLocaleTimeString('en-Us', { hour: '2-digit', minute: '2-digit'});
-    
-    return formattedDate+ " " + formattedTime;
+    const formattedTime = dateObject.toLocaleTimeString('en-Us', { hour: '2-digit', minute: '2-digit' });
+
+    return formattedDate + " " + formattedTime;
   }
 
   formatTime(isoString: string): string {
     const dateObject = new Date(isoString);
-    
-   
 
-    const formattedTime = dateObject.toLocaleTimeString('en-Us', { hour: '2-digit', minute: '2-digit'});
-    
+
+
+    const formattedTime = dateObject.toLocaleTimeString('en-Us', { hour: '2-digit', minute: '2-digit' });
+
     return formattedTime;
   }
 
@@ -54,23 +54,23 @@ export class ProfilePage implements OnInit {
 
 
 
-  async openModal(item:any) {
+  async openModal(item: any) {
     const modal = await this.modalCtrl.create({
       component: ProtocolComponent,
       breakpoints: [0.75],
       initialBreakpoint: 0.75,
-      componentProps: {item}
+      componentProps: { item }
     });
     modal.present();
 
-    
+
   }
 
 
-  delete(item:any){
+  delete(item: any) {
     this.authservice.deleteSOS(item);
-    
+
   }
- 
+
 
 }

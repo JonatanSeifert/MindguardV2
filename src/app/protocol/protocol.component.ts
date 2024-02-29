@@ -50,16 +50,16 @@ export class ProtocolComponent implements OnInit {
           value: this.item.description,
           placeholder: 'Explain your Situation'
         },
-        // Füge hier weitere Inputfelder hinzu, falls benötigt
+
       ],
       buttons: [
         {
           text: 'Not Helpfull',
           cssClass: 'alert-helpfull-cancel',
           handler: async (data) => {
-            let handler="stay";
-            if(this.item.topflop!=false){
-              handler="change";
+            let handler = "stay";
+            if (this.item.topflop != false) {
+              handler = "change";
             }
             await this.authservice.updateSos(this.item.UsedExercise, false, handler, this.item.dateTime, data.title, data.message);
             this.item.name = data.title;
@@ -70,9 +70,9 @@ export class ProtocolComponent implements OnInit {
           text: 'Helpfull',
           cssClass: 'alert-helpfull-confirm',
           handler: async (data) => {
-            let handler="stay";
-            if(this.item.topflop!=true){
-              handler="change";
+            let handler = "stay";
+            if (this.item.topflop != true) {
+              handler = "change";
             }
 
             await this.authservice.updateSos(this.item.UsedExercise, true, handler, this.item.dateTime, data.title, data.message);

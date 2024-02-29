@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="content">
     <div class="header">
-      <img src="assets/icon/logo.svg"/>
+      <img src="assets/icon/logo.svg" />
       <h1 class="title">Mindguard
         <p class="subtitle">Your personal Everyday mental support.</p>
       </h1>
@@ -15,36 +15,22 @@
 
 
           <ion-item>
-            <ion-input formControlName="email" placeholder="Email"  class="input"></ion-input>
+            <ion-input formControlName="email" placeholder="Email" class="input"></ion-input>
             <ion-icon name="person-outline"></ion-icon>
-             <ion-note slot="helper" *ngIf="(this.logForm.get('email')?.touched || this.logForm.get('email')?.dirty) && this.logForm.get('email')?.hasError('required')">Email is required</ion-note>
-          
-
+            <ion-note slot="helper"
+              *ngIf="(this.logForm.get('email')?.touched || this.logForm.get('email')?.dirty) && this.logForm.get('email')?.hasError('required')">Email
+              is required</ion-note>
           </ion-item>
-
-
-          <!-- <div *ngIf="this.logForm.get('email')?.touched">
-        <ion-text *ngIf="this.logForm.get('email')?.hasError('required')">
-          Email is required
-        </ion-text>
-      </div> -->
-
-
-
 
 
           <ion-item>
             <ion-input formControlName="password" placeholder="password" class="input"></ion-input>
             <ion-icon name="lock-closed-outline"></ion-icon>
-            <ion-note slot="helper" *ngIf="(this.logForm.get('password')?.touched || this.logForm.get('password')?.dirty) && this.logForm.get('password')?.hasError('required')">Password is required</ion-note>
+            <ion-note slot="helper"
+              *ngIf="(this.logForm.get('password')?.touched || this.logForm.get('password')?.dirty) && this.logForm.get('password')?.hasError('required')">Password
+              is required</ion-note>
           </ion-item>
 
-          <!-- <div *ngIf="this.logForm.get('password')?.touched">
-        <ion-text *ngIf="this.logForm.get('password')?.hasError('required')">
-          Password is required
-        </ion-text>
-      </div>
- -->
 
 
 

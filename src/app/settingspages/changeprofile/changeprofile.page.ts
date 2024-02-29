@@ -25,11 +25,11 @@ export class ChangeprofilePage implements OnInit {
   profilepic: any;
 
 
-  tobase60(src: any){
-    if(src== "https://ionicframework.com/docs/img/demos/avatar.svg"){
+  tobase60(src: any) {
+    if (src == "https://ionicframework.com/docs/img/demos/avatar.svg") {
       return src;
-    }else{
-    return "data:image/jpeg;base64," + src;
+    } else {
+      return "data:image/jpeg;base64," + src;
     }
   }
 
@@ -45,17 +45,17 @@ export class ChangeprofilePage implements OnInit {
   }
 
 
-  async save(){
+  async save() {
     const loading = await this.loader.create();
     await loading.present();
-      await this.authservice.saveNewUserSettings(this.name, this.profilepic);
+    await this.authservice.saveNewUserSettings(this.name, this.profilepic);
     loading.dismiss();
-      this.router.navigateByUrl('home/settings');
+    this.router.navigateByUrl('home/settings');
 
 
-}
+  }
 
- 
+
 
 
   async changeprofilepic() {

@@ -18,95 +18,72 @@ export class LoginPage implements OnInit {
   logForm = new FormGroup({
 
 
-    email: new FormControl ('', [
+    email: new FormControl('', [
 
       Validators.required
     ]),
 
-    password: new FormControl ('',[
+    password: new FormControl('', [
       Validators.required
     ])
-});
-  constructor(public authservice: AuthService, public loadingCtrl: LoadingController, public router: Router) {  
-   
-   
-  //  this.authstates =  authState(this.authservice.auth).subscribe(user => {
-  //     if(user){
-  //       authservice.getUserData().subscribe(data =>{
-  //         if(data){
-  //                 this.data = data;
-  //                 this.name = data['name'];
-  //                 //this.dismissload();
-  //               }
-  //       })
-  //     }
-  //   });
+  });
+  constructor(public authservice: AuthService, public loadingCtrl: LoadingController, public router: Router) {
+
   }
 
 
 
   async ngOnInit() {
 
-
-  //   this.authservice.subscribe((data) => {
-  //     console.log("load");
-  //     if(data){
-  //       this.data = data;
-  //       this.name = data['name'];
-  //     }
-      
-    
-    
-  // });
   }
 
-   loading:any;
-  async startload(){
-     this.loading = await this.loadingCtrl.create();
+  loading: any;
+  async startload() {
+    this.loading = await this.loadingCtrl.create();
     await this.loading.present();
   }
-  
-  async dismissload(){
+
+  async dismissload() {
     this.loading.dismiss();
   }
 
-  async login(){
+  async login() {
     const loading = await this.loadingCtrl.create();
     await loading.present();
 
-    if(this.logForm.valid && this.logForm.value.email && this.logForm.value.password){
+    if (this.logForm.valid && this.logForm.value.email && this.logForm.value.password) {
 
-      const user = await this.authservice.login(this.logForm.value.email, this.logForm.value.password).catch(error=>{
+      const user = await this.authservice.login(this.logForm.value.email, this.logForm.value.password).catch(error => {
 
       }
       );
-      
-      if(user){
-      let verified: boolean | undefined = false;
-      verified = this.authservice.getUser()?.emailVerified;
-      
-      if(verified){
-        await this.authservice.createUserData(user.user.displayName, user.user.email);
-        this.router.navigateByUrl('/home', {replaceUrl: true});
+
+      if (user) {
+        let verified: boolean | undefined = false;
+        verified = this.authservice.getUser()?.emailVerified;
+
+        if (verified) {
+          await this.authservice.createUserData(user.user.displayName, user.user.email);
+          this.router.navigateByUrl('/home', { replaceUrl: true });
+        }
+
       }
-    
-    }
 
     }
 
     loading.dismiss();
-    
-   
-    
+
+
+
   }
 
-  unsubscribe(){
+  unsubscribe() {
     this.authstates.unsubscribe();
   }
 
-  test(){
-    
-   
+  test() {
+
+
   }
 
 }

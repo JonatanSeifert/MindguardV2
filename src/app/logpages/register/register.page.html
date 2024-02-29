@@ -1,79 +1,57 @@
 <ion-content [fullscreen]="true">
- <div class="content">
-  <div class="header">
-    <h1 class="title">Create Account</h1>
-    <p class="subtitle">Sign Up to create your personal Account</p>
-  </div>
-
-  <form [formGroup]="regForm" >
-    <div class="ion-padding">
-
-
-      <ion-item>
-        <ion-input formControlName="fullname" placeholder="Full name"></ion-input>
-        <ion-icon name="person-outline"></ion-icon>
-        <ion-note slot="helper" *ngIf="(this.regForm.get('fullname')?.touched || this.regForm.get('fullname')?.dirty) && this.regForm.get('fullname')?.hasError('required')">Full Name Required</ion-note>
-      </ion-item>
-
-
-      <!-- <div *ngIf="this.regForm.get('fullname')?.touched">
-        <ion-text *ngIf="this.regForm.get('fullname')?.hasError('required')">
-          Full name is required
-        </ion-text>
-      </div> -->
-
-
-
-
-
-      <ion-item>
-        <ion-input formControlName="email" placeholder="Email"></ion-input>
-        <ion-icon name="mail-outline"></ion-icon>
-        <ion-note slot="helper" *ngIf="(this.regForm.get('email')?.touched || this.regForm.get('email')?.dirty) && this.regForm.get('email')?.hasError('required')">Email Required</ion-note>
-        <ion-note slot="helper" *ngIf="(this.regForm.get('email')?.touched || this.regForm.get('email')?.dirty) && this.regForm.get('email')?.hasError('email')">Email is unvalid</ion-note>
-      </ion-item>
-
-
-      <!-- <div *ngIf="this.regForm.get('email')?.touched">
-        <ion-text *ngIf="this.regForm.get('email')?.hasError('required')">
-          Email is required
-        </ion-text>
-        <ion-text  *ngIf="this.regForm.get('email')?.hasError('email')">
-          Email is unvalid
-        </ion-text>
-      </div> -->
-
-
-
-
-
-      <ion-item>
-        <ion-input formControlName="password" placeholder="Password"></ion-input>
-        <ion-icon name="lock-closed-outline"></ion-icon>
-        <ion-note slot="helper" *ngIf="(this.regForm.get('password')?.touched || this.regForm.get('password')?.dirty) && this.regForm.get('password')?.hasError('required')">Password Required</ion-note>
-        <ion-note slot="helper" *ngIf="(this.regForm.get('password')?.touched || this.regForm.get('password')?.dirty) && this.regForm.get('password')?.hasError('pattern')">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</ion-note>
-      </ion-item>
-
-
-      <!-- <div *ngIf="this.regForm.get('password')?.touched">
-        <ion-text *ngIf="this.regForm.get('password')?.hasError('required')">
-          Password is required
-        </ion-text>
-        <ion-text *ngIf="this.regForm.get('password')?.hasError('pattern')">
-          Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
-        </ion-text>
-      </div> -->
-
-
-
-      
-      <div>
-        <ion-button (click)="signUp()">Create Account</ion-button>
-      </div>
-      <div>
-        <p>Already a member? <a [routerLink]="['/login']">Login now!</a></p>
-      </div>
+  <div class="content">
+    <div class="header">
+      <h1 class="title">Create Account</h1>
+      <p class="subtitle">Sign Up to create your personal Account</p>
     </div>
-  </form>
-</div>
+
+    <form [formGroup]="regForm">
+      <div class="ion-padding">
+
+
+        <ion-item>
+          <ion-input formControlName="fullname" placeholder="Full name"></ion-input>
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-note slot="helper"
+            *ngIf="(this.regForm.get('fullname')?.touched || this.regForm.get('fullname')?.dirty) && this.regForm.get('fullname')?.hasError('required')">Full
+            Name Required</ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          <ion-input formControlName="email" placeholder="Email"></ion-input>
+          <ion-icon name="mail-outline"></ion-icon>
+          <ion-note slot="helper"
+            *ngIf="(this.regForm.get('email')?.touched || this.regForm.get('email')?.dirty) && this.regForm.get('email')?.hasError('required')">Email
+            Required</ion-note>
+          <ion-note slot="helper"
+            *ngIf="(this.regForm.get('email')?.touched || this.regForm.get('email')?.dirty) && this.regForm.get('email')?.hasError('email')">Email
+            is unvalid</ion-note>
+        </ion-item>
+
+
+
+        <ion-item>
+          <ion-input formControlName="password" placeholder="Password"></ion-input>
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <ion-note slot="helper"
+            *ngIf="(this.regForm.get('password')?.touched || this.regForm.get('password')?.dirty) && this.regForm.get('password')?.hasError('required')">Password
+            Required</ion-note>
+          <ion-note slot="helper"
+            *ngIf="(this.regForm.get('password')?.touched || this.regForm.get('password')?.dirty) && this.regForm.get('password')?.hasError('pattern')">Must
+            contain at least one number and one uppercase and lowercase letter, and at least 8 or more
+            characters</ion-note>
+        </ion-item>
+
+
+        <div>
+          <ion-button (click)="signUp()">Create Account</ion-button>
+        </div>
+        <div>
+          <p>Already a member? <a [routerLink]="['/login']">Login now!</a></p>
+        </div>
+      </div>
+    </form>
+  </div>
 </ion-content>

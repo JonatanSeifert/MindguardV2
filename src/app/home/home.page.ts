@@ -8,20 +8,20 @@ import { App } from '@capacitor/app';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit{
+export class HomePage implements OnInit {
 
-  constructor(public auth: AuthService, public ngZone: NgZone) {}
+  constructor(public auth: AuthService, public ngZone: NgZone) { }
 
-  ngOnInit(){
-   
+  ngOnInit() {
+
   }
 
-  ionViewWillEnter(){
-   
+  ionViewWillEnter() {
+
 
     App.addListener('appStateChange', (state) => {
       if (state.isActive) {
-       
+
         this.ngZone.run(() => {
           this.auth.checkAndRequestPermissions();
         });

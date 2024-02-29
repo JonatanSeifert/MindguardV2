@@ -17,4 +17,4 @@ import { ChangeprofilePage } from './changeprofile.page';
   ],
   declarations: [ChangeprofilePage]
 })
-export class ChangeprofilePageModule {}
+export class ChangeprofilePageModule { }
