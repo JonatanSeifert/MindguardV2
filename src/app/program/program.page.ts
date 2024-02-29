@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { LoadingController } from '@ionic/angular';
 
@@ -8,13 +8,13 @@ import { LoadingController } from '@ionic/angular';
   templateUrl: './program.page.html',
   styleUrls: ['./program.page.scss'],
 })
-export class ProgramPage implements OnInit {
+export class ProgramPage  {
 
   program:any ;
 
-  constructor(public route: ActivatedRoute, public authservice: AuthService, public loader: LoadingController) { }
+  constructor(public route: ActivatedRoute, public authservice: AuthService, public loader: LoadingController,public Router: Router) { }
 
-  async ngOnInit() {
+  async ngAfterViewInit() {
     const loading = await this.loader.create();
     await loading.present();
     this.route.queryParams.subscribe(params => {
@@ -64,6 +64,7 @@ export class ProgramPage implements OnInit {
           
         }else{
           console.log("daFuq");
+          this.Router.navigateByUrl('/home' ,{replaceUrl: true});
           
         }
       }else{

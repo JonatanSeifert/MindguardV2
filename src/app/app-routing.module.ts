@@ -31,10 +31,15 @@ const routes: Routes = [
     ,...canActivate(redirectUnauthorizedToWelcome)
   },
   {
+    path: 'changeprofile',
+    loadChildren: () => import('./settingspages/changeprofile/changeprofile.module').then( m => m.ChangeprofilePageModule)
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
   }
+ 
 ];
 
 @NgModule({

@@ -5,7 +5,7 @@
   <div class="userinfo">
 
     <ion-avatar>
-      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      <img alt="Silhouette of a person's head" [src]="this.authservice.profilepic" />
     </ion-avatar>
 
     <h2>{{this.authservice.data['name']}}</h2>
@@ -30,7 +30,7 @@
         
         
         
-        <div class="item"><ion-button fill="clear"expand="full"><ion-icon name="settings-outline"></ion-icon><strong>Settings</strong></ion-button></div>
+        <div class="item"><ion-button fill="clear"expand="full" (click)="changeprofile()"><ion-icon name="settings-outline"></ion-icon><strong>Settings</strong></ion-button></div>
         <div class="item"><ion-button fill="clear"expand="full"><ion-icon name="information-circle-outline"></ion-icon><strong>About us</strong></ion-button></div>
         <div class="item"><ion-button fill="clear"expand="full" (click)="logout()"><ion-icon name="power-outline"></ion-icon><strong>Logout</strong></ion-button></div>
     </div>

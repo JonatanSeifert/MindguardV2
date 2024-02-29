@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -8,7 +9,7 @@ import { AuthService } from '../service/auth.service';
 })
 export class SettingsPage implements OnInit {
 
-  constructor(public authservice: AuthService) { }
+  constructor(public authservice: AuthService, public router: Router) { }
 
   ngOnInit() {
   }
@@ -19,5 +20,9 @@ export class SettingsPage implements OnInit {
    
      
     
+  }
+
+  changeprofile(){
+    this.router.navigateByUrl('/changeprofile');
   }
 }
