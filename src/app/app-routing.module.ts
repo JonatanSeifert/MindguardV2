@@ -35,10 +35,15 @@ const routes: Routes = [
     loadChildren: () => import('./settingspages/changeprofile/changeprofile.module').then( m => m.ChangeprofilePageModule)
   },
   {
+    path: 'aboutus',
+    loadChildren: () => import('./settingspages/aboutus/aboutus.module').then( m => m.AboutusPageModule)
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
-  }
+  },
+  
  
 ];
 

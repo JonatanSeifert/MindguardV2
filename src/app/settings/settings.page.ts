@@ -25,4 +25,8 @@ export class SettingsPage implements OnInit {
   changeprofile(){
     this.router.navigateByUrl('/changeprofile');
   }
+
+  aboutus(){
+    this.router.navigateByUrl('/aboutus');
+  }
 }

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Camera } from '@capacitor/camera';
 import { AlertController } from '@ionic/angular';
 import { AndroidSettings, IOSSettings, NativeSettings } from 'capacitor-native-settings';
+import { Geolocation, PositionOptions } from '@capacitor/geolocation';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@awesome-cordova-plugins/native-geocoder';
 
 
 @Injectable({
@@ -18,6 +20,11 @@ export class AuthService {
   profilepic: string = "https://ionicframework.com/docs/img/demos/avatar.svg";
 
   finalarray: any = [];
+
+  decoderoptions: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 1
+  }
 
 
   constructor(public auth: Auth, public firestore: Firestore, public router: Router, public alertctrl: AlertController, public storage: Storage) {
@@ -36,12 +43,12 @@ export class AuthService {
 
 
 
-              if(data['profilepicurl'] == undefined || data['profilepicurl'] == ""){
-                this.profilepic = "https://ionicframework.com/docs/img/demos/avatar.svg" ;
-              }else{
+              if (data['profilepicurl'] == undefined || data['profilepicurl'] == "") {
+                this.profilepic = "https://ionicframework.com/docs/img/demos/avatar.svg";
+              } else {
                 this.profilepic = data['profilepicurl'];
               }
-              
+
 
               if (data['program'] == undefined) {
                 // console.log("leer");
@@ -253,7 +260,9 @@ export class AuthService {
     let sos: any;
 
     //Location
-    let location = "Location stuff"
+    console.log("start loc");
+    
+    let location = await this.getCloseLocation();
     //Name
     let name = "Auto Generated"
 
@@ -289,7 +298,7 @@ export class AuthService {
 
     console.log(protocol.indexOf(todelete));
 
-    if(protocol.indexOf(todelete)==-1){
+    if (protocol.indexOf(todelete) == -1) {
       this.finalarray = [];
       this.updateProtocol();
       return;
@@ -384,6 +393,7 @@ export class AuthService {
 
 
   async checkAndRequestPermissions() {
+
     const permission = await Camera.checkPermissions();
 
 
@@ -415,27 +425,64 @@ export class AuthService {
 
       }
 
-
     }
 
 
+
+      const geopermission = await Geolocation.checkPermissions();
+
+
+      if (geopermission.location != 'granted' ) {
+        // console.log("ask for permission");
+
+        const result = await Geolocation.requestPermissions();
+
+        if (result.location != 'granted' ) {
+          // console.log(permission);
+
+          const alertdrama = await this.alertctrl.create({
+            header: 'Permission denied',
+            subHeader: 'please give Mindguard permissions',
+            message: 'Mindguard was created to give immediate help. Permissions Request could cost valueable seconds',
+            backdropDismiss: false,
+            buttons: [{
+              'text': "Give Permission",
+              'handler': () => {
+                NativeSettings.open({
+                  optionAndroid: AndroidSettings.ApplicationDetails,
+                  optionIOS: IOSSettings.App
+                });
+              }
+            }]
+          });
+
+          await alertdrama.present();
+
+        }
+
+
+      }
+
+      console.log(this.getCloseLocation());
+    
+
   }
 
-  async saveNewUserSettings(name: string, photo:any){
+  async saveNewUserSettings(name: string, photo: any) {
     const user = this.auth.currentUser;
-    const dataRef = doc(this.firestore, `profile/${user?.uid}`);  
-    
+    const dataRef = doc(this.firestore, `profile/${user?.uid}`);
+
     const profilepicurl = await this.uploadPhoto(photo);
 
-    await setDoc(dataRef, { name: name, profilepicurl: profilepicurl }, {merge: true} );
+    await setDoc(dataRef, { name: name, profilepicurl: profilepicurl }, { merge: true });
 
   }
 
-  async uploadPhoto(photo: any){
+  async uploadPhoto(photo: any) {
     console.log();
-    
+
     const user = this.auth.currentUser;
-    const storageRef = ref(this.storage, `uploads/${user?.uid}/profile.png`) ;
+    const storageRef = ref(this.storage, `uploads/${user?.uid}/profile.png`);
 
     try {
       await uploadString(storageRef, photo, 'base64');
@@ -445,9 +492,28 @@ export class AuthService {
       return "";
     }
 
-    
 
- }
+
+  }
+
+
+  async getCloseLocation(){
+    let options: PositionOptions = {
+      enableHighAccuracy: false
+    };
+
+    const location = await Geolocation.getCurrentPosition(options);
+    console.log("gotloc");
+    
+    NativeGeocoder.reverseGeocode(location.coords.latitude, location.coords.longitude, this.decoderoptions).then( (result: NativeGeocoderResult[]) => {
+      console.log(result[0].areasOfInterest[0]);
+      
+      return result[0].areasOfInterest[0];
+    });
+
+
+  }
+
 
 
 }
