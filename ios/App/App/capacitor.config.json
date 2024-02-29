@@ -1,0 +1,8 @@
+{
+	"appId": "de.mindguard.app",
+	"appName": "Mindguard",
+	"webDir": "www",
+	"server": {
+		"androidScheme": "https"
+	}
+}
