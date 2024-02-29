@@ -18,10 +18,10 @@
       <p> {{formatDate(date.date)}} </p>
     </ion-item-divider>
 
-    <ion-item-sliding *ngFor="let item of date.logs">
+    <ion-item-sliding *ngFor="let item of date.logs" (ionSwipe)="delete(item)">
    
   
-      <ion-item [button]="true" >
+      <ion-item [button]="true" (click)="openModal(item)">
         <div class="time" slot="start">
           <ion-icon name="alarm"></ion-icon>
           <h6>{{formatTime(item.dateTime)}}</h6>
@@ -35,7 +35,7 @@
   
       <ion-item-options side="end">
         <ion-item-option color="danger" expandable>
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
+          <ion-icon slot="icon-only" name="trash" (click)="delete(item)"></ion-icon>
         </ion-item-option>
        
       </ion-item-options>
@@ -45,6 +45,13 @@
   </ion-list>
 </div>
 </div>
+
+
+
+
+
+
+
 
 
 

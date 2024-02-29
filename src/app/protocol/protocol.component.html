@@ -1,0 +1,43 @@
+<div class="content">
+
+  <div class="header">
+    <p>{{formatDateandTime(item.dateTime)}}</p>
+    <p>{{item.location}}</p>
+    <h1><strong>{{item.name}}</strong></h1>
+  </div>
+  <div class="middle">
+    <div class="middlescroll">
+      <p style="white-space: pre-line;"> {{item.description}}</p>
+    </div>
+  </div>
+  <div class="footer">
+    <h2>Program</h2>
+    <div class="currentprogram">
+      <div class="cpleft">
+        <ion-icon name="ear"></ion-icon>
+        <ion-icon name="eye"></ion-icon>
+        <ion-icon name="finger-print"></ion-icon>
+      </div>
+      <div class="cpright">
+        <strong>
+          <p>{{item.usedExercise}}</p>
+        </strong>
+        <p>Keine Ahnung aber iwas steht da</p>
+      </div>
+    </div>
+    <div class="rating">
+      <div class="rleft">
+      <h2>Rating</h2>
+      <img *ngIf="item.topflop" src="assets/icon/Group 100.svg" />
+      <img *ngIf="!item.topflop" src="assets/icon/Group 101.svg" />
+    </div>
+    <div class="rright" (click)="edit()">
+      <ion-icon name="create-outline"></ion-icon>
+    <p>Edit</p>  
+    </div>
+    </div>
+  </div>
+
+
+
+</div>

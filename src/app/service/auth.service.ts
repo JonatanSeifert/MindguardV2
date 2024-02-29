@@ -154,17 +154,41 @@ export class AuthService {
 
       let q = this.data['program'];
       let p:any = [];
-      
       if(q!=undefined) p = JSON.parse(q);
+
+
       let f = false;
       
       for(let i of p){
         if(i.name==program){
           
           if(topflop){
-            i.helpfullness++;
+            if(topflophandler=="stay"){
+              //console.log("stay");
+              
+            }else if(topflophandler=="change"){
+              i.helpfullness+=2;
+             // console.log("change");
+              
+            }else {
+              //console.log("nomramls");
+              
+              i.helpfullness++;
+            }
+            
           } else{
-            i.helpfullness--;
+            if(topflophandler=="stay"){
+              //console.log("stay");
+              
+            }else if(topflophandler=="change"){
+              i.helpfullness-=2;
+              //console.log("change");
+              
+            }else {
+             // console.log("nomramls");
+              
+              i.helpfullness--;
+            }
           }      
           f=true;
         }
@@ -182,7 +206,7 @@ export class AuthService {
       await setDoc(dataRef, {program : JSON.stringify(p)}, {merge: true}); 
       
       let protocol =  JSON.parse(this.data['protocol'])
-      console.log("vorher: " + this.data['protocol']);
+      //console.log("vorher: " + this.data['protocol']);
       
       for(let protocolitem of protocol){
         if(protocolitem.dateTime == dateTime){
@@ -194,12 +218,14 @@ export class AuthService {
 
           
           protocolitem.description = description;
+          protocolitem.topflop = topflop;
           
           
         }
-        console.log(protocolitem);
+       // console.log(protocolitem);
       }
       
+     
 
       this.data['protocol'] = JSON.stringify(protocol);
      // console.log("Nacher: "+this.data['protocol']);
@@ -230,6 +256,34 @@ export class AuthService {
     const dataRef = doc(this.firestore, `profile/${user?.uid}`);
 
     await setDoc(dataRef, {protocol : JSON.stringify(data)}, {merge: true});   
+
+  }
+
+
+  async deleteSOS(item: any){
+    let id = item.dateTime;
+    console.log(id);
+
+    let protocol =  JSON.parse(this.data['protocol'])
+    let todelete;
+      
+      for(let protocolitem of protocol){
+        if(protocolitem.dateTime == id){
+          todelete=protocolitem;
+          
+        }
+       // console.log(protocolitem);
+      }
+      
+      
+      console.log(protocol.indexOf(todelete));
+      protocol.splice(protocol.indexOf(todelete),1);
+
+    this.data['protocol'] = JSON.stringify(protocol);
+    // console.log("Nacher: "+this.data['protocol']);
+    const user = this.auth.currentUser;
+    const dataRef = doc(this.firestore, `profile/${user?.uid}`);
+     await setDoc(dataRef, {protocol : JSON.stringify(protocol)}, {merge: true}); 
 
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { formatDate } from '@angular/common';
 import { ModalController } from '@ionic/angular';
+import { ProtocolComponent } from '../protocol/protocol.component';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ export class ProfilePage implements OnInit {
   
   
 
-  constructor(public authservice: AuthService) { 
+  constructor(public authservice: AuthService, public modalCtrl: ModalController) { 
    
     
   }
@@ -49,6 +50,27 @@ export class ProfilePage implements OnInit {
     return formattedTime;
   }
 
+
+
+
+
+  async openModal(item:any) {
+    const modal = await this.modalCtrl.create({
+      component: ProtocolComponent,
+      breakpoints: [0.75],
+      initialBreakpoint: 0.75,
+      componentProps: {item}
+    });
+    modal.present();
+
+    
+  }
+
+
+  delete(item:any){
+    this.authservice.deleteSOS(item);
+    
+  }
  
 
 }
